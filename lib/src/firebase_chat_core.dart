@@ -423,6 +423,7 @@ class FirebaseChatCore {
     if (firebaseUser == null) return const Stream.empty();
     return getFirebaseFirestore()
         .collection(config.usersCollectionName)
+        .where('isHidden', isEqualTo: false)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs.fold<List<types.User>>(
